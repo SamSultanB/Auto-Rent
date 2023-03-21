@@ -6,10 +6,16 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 @RestController
-@RequestMapping("/home")
-public class UserController {
-    @GetMapping
-    public ModelAndView home(){
-        return new ModelAndView("home");
+public class AuthorizationController {
+
+    @GetMapping("/login")
+    public ModelAndView login(){
+        return new ModelAndView("login");
     }
+
+    @GetMapping("/registration")
+    public ModelAndView registration(){
+        return new ModelAndView("registration");
+    }
+
 }

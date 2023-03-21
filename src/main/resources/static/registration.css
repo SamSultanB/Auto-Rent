@@ -4,7 +4,7 @@ body {
       font-size: 14px;
     }
 
-    .login-container {
+    .registration-container {
       width: 400px;
       margin: 0 auto;
       margin-top: 50px;
@@ -14,7 +14,7 @@ body {
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     }
 
-    .login-container h2 {
+    .registration-container h2 {
       text-align: center;
       margin-bottom: 20px;
     }
@@ -23,7 +23,7 @@ body {
       display: block;
       width: 100%;
       padding: 10px;
-      margin-bottom: 25px;
+      margin-bottom: 20px;
       border: 1px solid #ccc;
       border-radius: 5px;
     }
