@@ -12,4 +12,5 @@ public class UserController {
     public ModelAndView home(){
         return new ModelAndView("home");
     }
+
 }

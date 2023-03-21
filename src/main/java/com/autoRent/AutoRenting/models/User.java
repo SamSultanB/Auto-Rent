@@ -39,7 +39,6 @@ public class User {
                     name = "users_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(
                     name = "role_id", referencedColumnName = "id"))
-
     private Collection<UserRole> userRole;
 
     public User(){
@@ -51,17 +50,13 @@ public class User {
             String surname,
             String email,
             String password,
-            String phone,
-            String address,
-            String license
+            Collection<UserRole> userRole
     ) {
         this.name = name;
         this.surname = surname;
         this.email = email;
         this.password = password;
-        this.phone = phone;
-        this.address = address;
-        this.license = license;
+        this.userRole = userRole;
     }
 
 }

@@ -1,7 +1,10 @@
 package com.autoRent.AutoRenting.services;
 
+import com.autoRent.AutoRenting.models.User;
+import com.autoRent.AutoRenting.models.UserDTO;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
-@Service
-public interface UserService {
+public interface UserService extends UserDetailsService {
+    User save(UserDTO userDTO);
 }
