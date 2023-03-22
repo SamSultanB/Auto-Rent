@@ -20,7 +20,6 @@ public class RoleSuccessHandler implements AuthenticationSuccessHandler {
 
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         for (GrantedAuthority grantedAuthority : authorities) {
-//            System.out.println("role " + grantedAuthority.getAuthority());
             if (grantedAuthority.getAuthority().equals("USER")) {
                 redirectUrl = "/home";
                 break;
@@ -29,7 +28,6 @@ public class RoleSuccessHandler implements AuthenticationSuccessHandler {
                 break;
             }
         }
-        System.out.println("redirectUrl " + redirectUrl);
         if (redirectUrl == null) {
             throw new IllegalStateException();
         }

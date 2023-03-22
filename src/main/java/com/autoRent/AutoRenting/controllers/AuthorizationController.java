@@ -25,6 +25,7 @@ public class AuthorizationController {
         return new ModelAndView("login");
     }
 
+
     @GetMapping("/registration")
     public ModelAndView registration(){
         return new ModelAndView("registration");
