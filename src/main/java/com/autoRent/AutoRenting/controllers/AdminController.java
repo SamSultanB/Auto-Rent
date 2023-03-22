@@ -13,4 +13,16 @@ public class AdminController {
         return "This is admin page!";
     }
 
+    public String addCar(){
+        return "Car is added";
+    }
+
+    public String bookedCar(){
+        return "Booked car";
+    }
+
+    public String bookedCars(){
+        return "List of booked cars";
+    }
+
 }
