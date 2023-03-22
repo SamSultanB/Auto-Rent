@@ -6,9 +6,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 @RestController
-@RequestMapping("/home")
 public class UserController {
-    @GetMapping
+    @GetMapping("/home")
     public ModelAndView home(){
         return new ModelAndView("home");
     }
