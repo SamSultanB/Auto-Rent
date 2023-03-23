@@ -1,4 +1,27 @@
 package com.autoRent.AutoRenting.services.serviceImpl;
 
-public class TransportServiceImpl {
+import com.autoRent.AutoRenting.models.Transport;
+import com.autoRent.AutoRenting.repositories.TransportRepository;
+import com.autoRent.AutoRenting.services.TransportService;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class TransportServiceImpl implements TransportService {
+
+    private TransportRepository transportRepository;
+
+    public TransportServiceImpl(TransportRepository transportRepository){
+        this.transportRepository = transportRepository;
+    }
+    @Override
+    public List<Transport> getAllTransport() {
+        return transportRepository.findAll();
+    }
+
+    @Override
+    public Transport getTransportById(Long id) {
+        return transportRepository.getReferenceById(id);
+    }
 }

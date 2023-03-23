@@ -47,13 +47,9 @@ public class UserSecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
 
-        http.csrf().disable().authorizeHttpRequests().requestMatchers( "/login", "/registration/**").permitAll()
+        http.csrf().disable().authorizeHttpRequests().requestMatchers( "/", "/registration/**").permitAll()
                 .requestMatchers("/home").hasAuthority("USER")
                 .requestMatchers("/admin").hasAuthority("ADMIN");
-//                .anyRequest().authenticated().and().formLogin().loginPage("/login").successHandler(roleSuccessHandler).permitAll()
-//                .and().logout().invalidateHttpSession(true).clearAuthentication(true)
-//                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-//                .logoutSuccessUrl("/login?logout").permitAll();
         return http.build();
     }
 
