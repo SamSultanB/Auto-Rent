@@ -1,7 +1,6 @@
 package com.autoRent.AutoRenting.services.serviceImpl;
 
 import com.autoRent.AutoRenting.models.User;
-import com.autoRent.AutoRenting.models.UserDTO;
 import com.autoRent.AutoRenting.models.UserRole;
 import com.autoRent.AutoRenting.repositories.UserRepository;
 import com.autoRent.AutoRenting.services.UserService;
@@ -13,7 +12,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
@@ -31,12 +29,8 @@ public class  UserServiceImpl implements UserService {
     }
 
     @Override
-    public User save(UserDTO registrationDto) {
-        User user = new User(registrationDto.getName(),
-                registrationDto.getSurname(),
-                registrationDto.getEmail(),
-                passwordEncoder.encode(registrationDto.getPassword()), Arrays.asList(new UserRole(registrationDto.getRole().toUpperCase()))
-        );
+    public User save(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
 

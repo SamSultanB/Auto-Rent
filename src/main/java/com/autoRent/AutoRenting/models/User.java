@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Getter
@@ -45,18 +46,21 @@ public class User {
 
     }
 
-    public User(
-            String name,
-            String surname,
-            String email,
-            String password,
-            Collection<UserRole> userRole
-    ) {
+    public User(String name,
+                String surname,
+                String email,
+                String password,
+                String phone,
+                String address,
+                String license,
+                Collection<UserRole> userRole) {
         this.name = name;
         this.surname = surname;
         this.email = email;
         this.password = password;
+        this.phone = phone;
+        this.address = address;
+        this.license = license;
         this.userRole = userRole;
     }
-
 }

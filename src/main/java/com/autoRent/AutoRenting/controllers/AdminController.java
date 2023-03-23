@@ -10,7 +10,7 @@ public class AdminController {
 
     @GetMapping("/admin")
     public String adminHome(){
-        return "This is admin page!";
+        return "Admin home page";
     }
 
     public String addCar(){

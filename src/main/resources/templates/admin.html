@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Car Rental Admin</title>
+    <link rel="stylesheet" type="text/css" href="admin.css">
+</head>
+<body>
+<header>
+    <nav>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">All Cars</a></li>
+            <li><a href="#">Booked Cars</a></li>
+            <li><a href="#">Free Cars</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Contact Us</a></li>
+        </ul>
+    </nav>
+</header>
+<section class="hero">
+    <div class="hero-text">
+        <h1>Rent a Car Today!</h1>
+        <p>Choose from a wide variety of cars at affordable rates.</p>
+        <button>Book Now</button>
+    </div>
+</section>
+<section class="cars">
+    <h2>Our Cars</h2>
+    <div class="car-container">
+        <tr th:each = "lecture: ${lectures}">
+            <td th:text = "${lecture.lectureName}"></td>
+            <td>
+                <button>Book</button>
+            </td>
+        </tr>
+    </div>
+</section>
+<section class="about">
+    <h2>About Us</h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id sapien vitae lorem faucibus pretium eu et libero. Sed sed leo eget massa commodo mollis sed et mi. Nam vitae orci nec mauris pretium consectetur.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id sapien vitae lorem faucibus pretium eu et libero. Sed sed leo eget massa commodo mollis sed et mi. Nam vitae orci nec mauris pretium consectetur.</p>
+</section>
+<footer>
+    <p>&copy; 2023 Car Rental. All rights reserved.</p>
+</footer>
+</body>
+</html>

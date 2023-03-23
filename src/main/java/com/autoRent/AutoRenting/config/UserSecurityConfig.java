@@ -12,7 +12,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -49,13 +48,12 @@ public class UserSecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
 
         http.csrf().disable().authorizeHttpRequests().requestMatchers( "/login", "/registration/**").permitAll()
-                .requestMatchers("templates/**", "/home.css", "/login.css", "/registration.css").permitAll()
                 .requestMatchers("/home").hasAuthority("USER")
-                .requestMatchers("/admin").hasAuthority("ADMIN")
-                .anyRequest().authenticated().and().formLogin().loginPage("/login").successHandler(roleSuccessHandler).permitAll()
-                .and().logout().invalidateHttpSession(true).clearAuthentication(true)
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/login?logout").permitAll();
+                .requestMatchers("/admin").hasAuthority("ADMIN");
+//                .anyRequest().authenticated().and().formLogin().loginPage("/login").successHandler(roleSuccessHandler).permitAll()
+//                .and().logout().invalidateHttpSession(true).clearAuthentication(true)
+//                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+//                .logoutSuccessUrl("/login?logout").permitAll();
         return http.build();
     }
 
