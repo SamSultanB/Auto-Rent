@@ -5,6 +5,7 @@ import com.autoRent.AutoRenting.models.UserDTO;
 import com.autoRent.AutoRenting.models.UserRole;
 import com.autoRent.AutoRenting.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.neo4j.Neo4jProperties;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
