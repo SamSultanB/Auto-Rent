@@ -8,13 +8,15 @@ import lombok.Setter;
 public class UserDTO {
     private String email;
     private String password;
+    private String role;
 
     public UserDTO() {
 
     }
 
-    public UserDTO(String email, String password) {
+    public UserDTO(String email, String password, String role) {
         this.email = email;
         this.password = password;
+        this.role = role;
     }
 }

@@ -12,7 +12,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Arrays;
 
@@ -35,12 +34,12 @@ public class AuthorizationController {
     }
 
     @PostMapping
-    public ResponseEntity<String> loginPost(@RequestBody UserDTO userDTO){
+    public ResponseEntity<String> login(@RequestBody UserDTO userDTO){
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                 userDTO.getEmail(), userDTO.getPassword()));
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        return new ResponseEntity<>("You signed-in successfully!.", HttpStatus.OK);
+        return ResponseEntity.ok("You signed-in successfully!.");
     }
 
     @GetMapping("/registration")
