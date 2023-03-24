@@ -11,17 +11,14 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 @Configuration
 @EnableWebSecurity
-public class UserSecurityConfig {
+public class UserSecurityConfiguration {
 
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private AuthenticationSuccessHandler roleSuccessHandler;
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -35,7 +32,6 @@ public class UserSecurityConfig {
         return auth;
     }
 
-
     @Bean
     public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
         AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
@@ -43,13 +39,12 @@ public class UserSecurityConfig {
         return authenticationManagerBuilder.build();
     }
 
-
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
 
-        http.csrf().disable().authorizeHttpRequests().requestMatchers( "/", "/registration/**").permitAll()
-                .requestMatchers("/home").hasAuthority("USER")
-                .requestMatchers("/admin").hasAuthority("ADMIN");
+        http.csrf().disable().authorizeHttpRequests().antMatchers("/registration/**", "/login/**").permitAll()
+                .antMatchers("/home/**").hasAuthority("USER")
+                .antMatchers("/admin/**").hasAuthority("ADMIN");
         return http.build();
     }
 

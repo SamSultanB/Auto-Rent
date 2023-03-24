@@ -1,25 +1,26 @@
 package com.autoRent.AutoRenting.models;
 
-import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import javax.persistence.*;
 
 @Getter
 @Setter
 @Entity
 @Table(name = "role")
-public class UserRole {
+public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
 
-    public UserRole() {
+    public Role() {
 
     }
 
-    public UserRole(String name) {
+    public Role(String name) {
         super();
         this.name = name;
     }

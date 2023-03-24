@@ -1,12 +1,8 @@
 package com.autoRent.AutoRenting.controllers;
 
-import com.autoRent.AutoRenting.models.User;
 import com.autoRent.AutoRenting.models.UserDTO;
-import com.autoRent.AutoRenting.models.UserRole;
 import com.autoRent.AutoRenting.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.neo4j.Neo4jProperties;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -14,10 +10,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
 
 @RestController
-@RequestMapping(path = "/")
+@RequestMapping("/")
 public class AuthorizationController {
 
     private UserService userService;
@@ -25,22 +20,23 @@ public class AuthorizationController {
     @Autowired
     private AuthenticationManager authenticationManager;
 
+
     public AuthorizationController(UserService userService) {
         this.userService = userService;
     }
 
-    @GetMapping
+    @GetMapping("/login")
     public String login(){
         return "Login! If you are first time, please go to registration page!";
     }
 
-    @PostMapping
-    public ResponseEntity<String> login(@RequestBody UserDTO userDTO){
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestBody UserDTO userDTO) {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                 userDTO.getEmail(), userDTO.getPassword()));
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        return ResponseEntity.ok("You signed-in successfully!.");
+        return ResponseEntity.ok("User signed-in successfully!.");
     }
 
     @GetMapping("/registration")
@@ -49,9 +45,9 @@ public class AuthorizationController {
     }
 
     @PostMapping("/registration")
-    public ResponseEntity<String> saveUser(@RequestBody User user){
-        user.setUserRole( Arrays.asList(new UserRole("USER")));
-        userService.save(user);
+    public ResponseEntity<String> saveUser(@RequestBody UserDTO userDTO){
+        userDTO.setRole("USER");
+        userService.save(userDTO);
         return ResponseEntity.ok("User registered successfully!");
     }
 
