@@ -1,8 +1,9 @@
 package com.autoRent.AutoRenting.models;
 
-import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import javax.persistence.*;
 
 @Entity
 @Getter
@@ -30,6 +31,9 @@ public class Transport {
     private String available;
     @OneToOne(mappedBy = "transport")
     private User user;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "rentForm_id", referencedColumnName = "id")
+    private RentForm rentForm;
 
     public Transport(){
 

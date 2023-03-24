@@ -1,7 +1,8 @@
 package com.autoRent.AutoRenting.services.serviceImpl;
 
+import com.autoRent.AutoRenting.models.Role;
 import com.autoRent.AutoRenting.models.User;
-import com.autoRent.AutoRenting.models.UserRole;
+import com.autoRent.AutoRenting.models.UserDTO;
 import com.autoRent.AutoRenting.repositories.UserRepository;
 import com.autoRent.AutoRenting.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +13,10 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.stream.Collectors;
+
 
 @Service
 public class  UserServiceImpl implements UserService {
@@ -29,8 +32,9 @@ public class  UserServiceImpl implements UserService {
     }
 
     @Override
-    public User save(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+    public User save(UserDTO userDTO) {
+        User user = new User(userDTO.getEmail(), passwordEncoder.encode(userDTO.getPassword()),
+                Arrays.asList(new Role(userDTO.getRole())));
         return userRepository.save(user);
     }
 
@@ -40,11 +44,11 @@ public class  UserServiceImpl implements UserService {
         if(user == null) {
             throw new UsernameNotFoundException("Wrong password or name");
         }
-        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), mapRolesToAuthorities(user.getUserRole()));
-
+        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), mapRolesToAuthorities(user.getRole()));
     }
 
-    private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<UserRole> roles){
+    private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles){
         return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
     }
+
 }
