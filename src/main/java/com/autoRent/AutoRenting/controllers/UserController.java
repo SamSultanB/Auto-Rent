@@ -1,13 +1,13 @@
 package com.autoRent.AutoRenting.controllers;
 
+import com.autoRent.AutoRenting.models.RentForm;
 import com.autoRent.AutoRenting.models.Transport;
 import com.autoRent.AutoRenting.services.TransportService;
+import com.autoRent.AutoRenting.services.UserService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.Collection;
 
 @RestController
@@ -15,9 +15,11 @@ import java.util.Collection;
 public class UserController {
 
     private TransportService transportService;
+    private UserService userService;
 
-    public UserController(TransportService transportService){
+    public UserController(TransportService transportService, UserService userService){
         this.transportService = transportService;
+        this.userService = userService;
     }
     @GetMapping
     public ResponseEntity<String> home(){
@@ -32,6 +34,14 @@ public class UserController {
     @GetMapping("/cars/{id}")
     public ResponseEntity<Transport> getCar(@PathVariable("id") Long id){
         return ResponseEntity.ok(transportService.getTransportById(id));
+    }
+
+    @PostMapping("/cars/{id}")
+    public ResponseEntity<String> rentCar(@PathVariable("id") Long id, @RequestBody RentForm rentForm, Principal principal){
+        transportService.getTransportById(id).setRentForm(rentForm);
+        transportService.getTransportById(id).setAvailable("Not available");
+        userService.getUserByEmail(principal.getName()).setTransport(transportService.getTransportById(id));
+        return ResponseEntity.ok("Transport is rent successfully!");
     }
 
 }
