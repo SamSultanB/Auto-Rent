@@ -3,9 +3,7 @@ package com.autoRent.AutoRenting.controllers;
 import com.autoRent.AutoRenting.models.Transport;
 import com.autoRent.AutoRenting.services.TransportService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 
@@ -25,8 +23,18 @@ public class AdminController {
     }
 
     @GetMapping("/cars")
-    public ResponseEntity<Collection<Transport>> cars(){
+    public ResponseEntity<Collection<Transport>> getAllCars(){
         return ResponseEntity.ok(transportService.getAllTransport());
     }
 
+    @PostMapping("/cars")
+    public ResponseEntity<String> addNewCar(@RequestBody Transport transport){
+        transportService.save(transport);
+        return ResponseEntity.ok("New car was added!");
+    }
+
+    @GetMapping("/cars/{id}")
+    public ResponseEntity<Transport> getCar(@PathVariable("id") Long id){
+        return ResponseEntity.ok(transportService.getTransportById(id));
+    }
 }

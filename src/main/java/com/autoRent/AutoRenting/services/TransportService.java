@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.Optional;
 
 public interface TransportService {
+
+    Transport save(Transport transport);
+
     List<Transport> getAllTransport();
 
     Transport getTransportById(Long id);

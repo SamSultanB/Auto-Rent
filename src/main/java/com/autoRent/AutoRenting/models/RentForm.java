@@ -3,7 +3,11 @@ package com.autoRent.AutoRenting.models;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
+@Entity
+@Table(name = "rentForm")
 public class RentForm {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,17 +23,17 @@ public class RentForm {
     @Column(name = "license")
     private String license;
     @Column(name = "rentFrom")
-    private DateTimeFormat rentFrom;
+    private LocalDate rentFrom;
     @Column(name = "rentTo")
-    private DateTimeFormat rentTo;
+    private LocalDate rentTo;
     @OneToOne(mappedBy = "rentForm")
-    private User user;
+    private Transport transport;
 
 
     public RentForm() {
     }
 
-    public RentForm(String name, String surname, String address, String phone, String license, DateTimeFormat rentFrom, DateTimeFormat rentTo) {
+    public RentForm(String name, String surname, String address, String phone, String license, LocalDate rentFrom, LocalDate rentTo) {
         this.name = name;
         this.surname = surname;
         this.address = address;
