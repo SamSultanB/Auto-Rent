@@ -15,6 +15,12 @@ public class TransportServiceImpl implements TransportService {
     public TransportServiceImpl(TransportRepository transportRepository){
         this.transportRepository = transportRepository;
     }
+
+    @Override
+    public Transport save(Transport transport) {
+        return transportRepository.save(transport);
+    }
+
     @Override
     public List<Transport> getAllTransport() {
         return transportRepository.findAll();
