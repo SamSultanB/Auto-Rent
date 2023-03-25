@@ -30,11 +30,20 @@ public class AdminController {
     @PostMapping("/cars")
     public ResponseEntity<String> addNewCar(@RequestBody Transport transport){
         transportService.save(transport);
-        return ResponseEntity.ok("New car was added!");
+        return ResponseEntity.ok("New transport was added!");
     }
+
+    @DeleteMapping()
 
     @GetMapping("/cars/{id}")
     public ResponseEntity<Transport> getCar(@PathVariable("id") Long id){
         return ResponseEntity.ok(transportService.getTransportById(id));
     }
+
+    @DeleteMapping("/cars/{id}")
+    public ResponseEntity<String> deleteCar(@PathVariable("id") Long id){
+        transportService.delete(id);
+        return ResponseEntity.ok("Transport was deleted");
+    }
+
 }

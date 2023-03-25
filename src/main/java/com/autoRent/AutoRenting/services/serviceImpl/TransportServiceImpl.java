@@ -17,8 +17,13 @@ public class TransportServiceImpl implements TransportService {
     }
 
     @Override
-    public Transport save(Transport transport) {
-        return transportRepository.save(transport);
+    public void save(Transport transport) {
+        transportRepository.save(transport);
+    }
+
+    @Override
+    public void delete(Long id) {
+        transportRepository.deleteById(id);
     }
 
     @Override

@@ -7,9 +7,14 @@ import java.util.Optional;
 
 public interface TransportService {
 
-    Transport save(Transport transport);
+    void save(Transport transport);
+
+    void delete(Long id);
 
     List<Transport> getAllTransport();
 
     Transport getTransportById(Long id);
+
+
+
 }
