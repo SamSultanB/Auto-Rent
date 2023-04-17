@@ -2,12 +2,14 @@ package com.autoRent.AutoRenting.controllers;
 
 import com.autoRent.AutoRenting.models.Transport;
 import com.autoRent.AutoRenting.services.TransportService;
+import io.swagger.annotations.Api;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 
 @RestController
+@Api(description = "Admin controllers")
 @RequestMapping("/admin")
 public class AdminController {
 

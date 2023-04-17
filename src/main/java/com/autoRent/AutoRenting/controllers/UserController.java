@@ -4,6 +4,7 @@ import com.autoRent.AutoRenting.models.RentForm;
 import com.autoRent.AutoRenting.models.Transport;
 import com.autoRent.AutoRenting.services.TransportService;
 import com.autoRent.AutoRenting.services.UserService;
+import io.swagger.annotations.Api;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,6 +12,7 @@ import java.security.Principal;
 import java.util.Collection;
 
 @RestController
+@Api(description = "User controllers")
 @RequestMapping("/home")
 public class UserController {
 
